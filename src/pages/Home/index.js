@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import Menu from "../../containers/Menu";
 import ServiceCard from "../../components/ServiceCard";
 import EventCard from "../../components/EventCard";
@@ -10,10 +11,14 @@ import Logo from "../../components/Logo";
 import Icon from "../../components/Icon";
 import Form from "../../containers/Form";
 import Modal from "../../containers/Modal";
-import { useData } from "../../contexts/DataContext";
+import DataContext from "../../contexts/DataContext";
 
 const Page = () => {
-  const {last} = useData()
+  const context = useContext(DataContext);
+  const lastEvent = context.data.events.reduce(
+    (latest, event) => new Date(event.date) > new Date(latest.date) ? event : latest
+  );
+
   return <>
     <header>
       <Menu />
@@ -117,9 +122,9 @@ const Page = () => {
       <div className="col presta">
         <h3>Notre derniére prestation</h3>
         <EventCard
-          imageSrc={last?.cover}
-          title={last?.title}
-          date={new Date(last?.date)}
+          imageSrc={lastEvent.cover}
+          title={lastEvent.title}
+          date={new Date(lastEvent.date)}
           small
           label="boom"
         />
