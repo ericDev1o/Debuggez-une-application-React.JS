@@ -15,7 +15,7 @@ import DataContext from "../../contexts/DataContext";
 
 const Page = () => {
   const context = useContext(DataContext);
-  const lastEvent = context.data.events.reduce(
+  const lastEvent = context.data?.events.reduce(
     (latest, event) => new Date(event.date) > new Date(latest.date) ? event : latest
   );
 
@@ -122,9 +122,9 @@ const Page = () => {
       <div className="col presta">
         <h3>Notre derniére prestation</h3>
         <EventCard
-          imageSrc={lastEvent.cover}
-          title={lastEvent.title}
-          date={new Date(lastEvent.date)}
+          imageSrc={lastEvent?.cover}
+          title={lastEvent?.title}
+          date={new Date(lastEvent?.date)}
           small
           label="boom"
         />
