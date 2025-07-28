@@ -120,13 +120,13 @@ const Page = () => {
     </main>
     <footer className="row">
       <div className="col presta">
-        <h3>Notre derniére prestation</h3>
+        <h3>Notre dernière prestation</h3>
         <EventCard
           imageSrc={lastEvent?.cover}
           title={lastEvent?.title}
           date={new Date(lastEvent?.date)}
           small
-          label="boom"
+          label={lastEvent?.type}
         />
       </div>
       <div className="col contact">
