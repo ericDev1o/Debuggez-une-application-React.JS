@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import Menu from "../../containers/Menu";
 import ServiceCard from "../../components/ServiceCard";
 import EventCard from "../../components/EventCard";
@@ -10,10 +11,14 @@ import Logo from "../../components/Logo";
 import Icon from "../../components/Icon";
 import Form from "../../containers/Form";
 import Modal from "../../containers/Modal";
-import { useData } from "../../contexts/DataContext";
+import DataContext from "../../contexts/DataContext";
 
 const Page = () => {
-  const {last} = useData()
+  const context = useContext(DataContext);
+  const lastEvent = context.data?.events.reduce(
+    (latest, event) => new Date(event.date) > new Date(latest.date) ? event : latest
+  );
+
   return <>
     <header>
       <Menu />
@@ -23,7 +28,7 @@ const Page = () => {
         <Slider />
       </section>
       <section className="ServicesContainer">
-        <h2 className="Title">Nos services</h2>
+        <h2 className="Title" id="nos-services">Nos services</h2>
         <p>Nous organisons des événements sur mesure partout dans le monde</p>
         <div className="ListContainer">
           <ServiceCard imageSrc="/images/priscilla-du-preez-Q7wGvnbuwj0-unsplash1.png">
@@ -52,11 +57,11 @@ const Page = () => {
         </div>
       </section>
       <section className="EventsContainer">
-        <h2 className="Title">Nos réalisations</h2>
+        <h2 className="Title" id="nos-realisations">Nos réalisations</h2>
         <EventList />
       </section>
       <section className="PeoplesContainer">
-        <h2 className="Title">Notre équipe</h2>
+        <h2 className="Title" id="notre-equipe">Notre équipe</h2>
         <p>Une équipe d’experts dédiés à l’ogranisation de vos événements</p>
         <div className="ListContainer">
           <PeopleCard
@@ -115,13 +120,13 @@ const Page = () => {
     </main>
     <footer className="row">
       <div className="col presta">
-        <h3>Notre derniére prestation</h3>
+        <h3>Notre dernière prestation</h3>
         <EventCard
-          imageSrc={last?.cover}
-          title={last?.title}
-          date={new Date(last?.date)}
+          imageSrc={lastEvent?.cover}
+          title={lastEvent?.title}
+          date={new Date(lastEvent?.date)}
           small
-          label="boom"
+          label={lastEvent?.type}
         />
       </div>
       <div className="col contact">
