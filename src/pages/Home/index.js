@@ -16,7 +16,7 @@ import DataContext from "../../contexts/DataContext";
 const Page = () => {
   const context = useContext(DataContext);
   const sortedEvents = context.data?.events.sort((a, b) => new Date(b.date) - new Date(a.date));
-  const lastEvent = sortedEvents[0];
+  const lastEvent = sortedEvents ? sortedEvents[0] : undefined;
 
   return <>
     <header>
