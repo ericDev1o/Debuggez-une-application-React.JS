@@ -18,8 +18,7 @@ const EventList = () => {
       !type
       ? data?.events
       : data?.events.filter(event => event.type === type)
-    // eslint-disable-next-line spaced-comment
-    .filter((_/*event*/, index) => {
+    .filter((_/* event */, index) => {
     if (
       (currentPage - 1) * PER_PAGE <= index &&
       PER_PAGE * currentPage > index
