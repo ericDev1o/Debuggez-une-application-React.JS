@@ -34,6 +34,7 @@ const data = {
 };
 
 /**
+ * DRY
  * Utilisation du contexte
  */
 const slide = () => {

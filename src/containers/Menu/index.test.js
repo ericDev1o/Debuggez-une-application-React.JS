@@ -4,10 +4,21 @@ import Menu from "./index";
 describe("When Menu is created", () => {
   it("must display a list of all links", async () => {
     render(<Menu />);
-    await screen.findByText("Nos services");
-    await screen.findByText("Nos réalisations");
-    await screen.findByText("Notre équipe");
-    await screen.findByText("Contact");
+    const services = await screen.findByText("Nos services");
+    const events = await screen.findByText("Nos réalisations");
+    const team = await screen.findByText("Notre équipe");
+    const contact = await screen.findByText("Contact");
+
+    expect(services && events && team && contact).toBeInTheDocument();
+  });
+  /**
+   * <svg ...title...> is a placeholder for <svg ...alt...>
+   */
+  it("should display Logo", async () => {
+    render(<Menu />);
+    const logo = await screen.findByTitle("Notre logo");
+
+    expect(logo).toBeInTheDocument();
   });
 });
 
@@ -43,9 +54,5 @@ describe(`& when
       })
     );
     expect(window.document.location.hash).toEqual("#contact");
-  });
-  it("should display Logo", async () => {
-    render(<Menu />);
-    expect(screen.findAllByAltText("Notre logo")).toBeTruthy();
   });
  });
