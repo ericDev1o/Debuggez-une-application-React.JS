@@ -27,7 +27,7 @@ const EventList = () => {
   const pageNumber = Math.ceil((filteredEvents?.length || 0) / PER_PAGE);
   const typeList = new Set(data?.events.map(event => event.type));
 
-  const eventsToDisplay = filteredEvents.slice(
+  const eventsToDisplay = filteredEvents?.slice(
     (currentPage - 1) * PER_PAGE, 
     currentPage * PER_PAGE
   )
@@ -45,7 +45,7 @@ const EventList = () => {
             onChange={value => changeType(value)}
           />
           <div id="events" className="ListContainer">
-            {eventsToDisplay.map((event) => (
+            {eventsToDisplay?.map((event) => (
               <Modal key={event.id} Content={<ModalEvent event={event} />}>
                 {({ setIsOpened }) => (
                   <EventCard
