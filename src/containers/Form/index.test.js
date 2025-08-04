@@ -1,19 +1,24 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import Form from "./index";
 
-describe("When Events is created", () => {
-  it("a list of event card is displayed", async () => {
+describe("When Form is created", () => {
+  it("it must display a list of field cards", async () => {
+    // Arrange
     render(<Form />);
-    await screen.findByText("Email");
-    await screen.findByText("Nom");
-    await screen.findByText("Prénom");
-    await screen.findByText("Personel / Entreprise");
+    // Act
+    const email = await screen.findByText("Email");
+    const name = await screen.findByText("Nom");
+    const firstname = await screen.findByText("Prénom");
+    const type = await screen.findByText("Personel / Entreprise");
+    // Assert
+    expect(email && name && firstname && type).toBeInTheDocument();
   });
 
-  describe("and a click is triggered on the submit button", () => {
-    it("the success action is called", async () => {
+  describe("and then when a click is triggered on the submit button", () => {
+    it("then it must call success", async () => {
       const onSuccess = jest.fn();
       render(<Form onSuccess={onSuccess} />);
+
       fireEvent(
         await screen.findByTestId("button-test-id"),
         new MouseEvent("click", {
@@ -23,6 +28,7 @@ describe("When Events is created", () => {
       );
       await screen.findByText("En cours");
       await screen.findByText("Envoyer");
+
       expect(onSuccess).toHaveBeenCalled();
     });
   });

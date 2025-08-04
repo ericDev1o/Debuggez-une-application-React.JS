@@ -2,9 +2,6 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import Home from "./index";
 import { DataProvider } from "../../contexts/DataContext";
 
-/**
- * DRY
- */
 const home = () => {
   render(
     <DataProvider>
@@ -14,17 +11,11 @@ const home = () => {
 }
 
 describe("When Form is created", () => {
-  it("a list of fields card is displayed", async () => {
-    home();
-    await screen.findByText("Email");
-    await screen.findByText("Nom");
-    await screen.findByText("Prénom");
-    await screen.findByText("Personel / Entreprise");
-  });
-
-  describe("and a click is triggered on the submit button", () => {
-    it("the success message is displayed", async () => {
-     home();
+  describe("and then when a click is triggered on the submit button", () => {
+    it("then it must display a success message", async () => {
+      // Arrange
+      home();
+      // Act
       fireEvent(
         await screen.findByText("Envoyer"),
         new MouseEvent("click", {
@@ -32,12 +23,12 @@ describe("When Form is created", () => {
           bubbles: true,
         })
       );
-      
       await screen.findByText("En cours");
-      await screen.findByText("Message envoyé !");
+      const message = await screen.findByText("Message envoyé !");
+      // Assert
+      expect(message).toBeInTheDocument();
     });
   });
-
 });
 
 
