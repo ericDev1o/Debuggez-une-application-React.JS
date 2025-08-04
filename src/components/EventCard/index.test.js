@@ -46,7 +46,7 @@ describe("When EventCard has small prop", () => {
         title="test event"
         label="test label"
         date={new Date("2022-04-01")}
-        small="true"
+        small
       />
     );
     const cardElement = await screen.getByTestId("card-testid");
