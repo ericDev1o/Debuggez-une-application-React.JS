@@ -42,16 +42,16 @@ describe("When Form is created", () => {
 
 
 describe("When a page is created", () => {
-  it("a list of events is displayed", () => {
+  it.skip("a list of events is displayed", () => {
     // to implement
   })
-  it("a list a people is displayed", () => {
+  it.skip("a list a people is displayed", () => {
     // to implement
   })
-  it("a footer is displayed", () => {
+  it.skip("a footer is displayed", () => {
     // to implement
   })
-  it("an event card, with the last event, is displayed", () => {
+  it.skip("an event card, with the last event, is displayed", () => {
     // to implement
   })
 });
