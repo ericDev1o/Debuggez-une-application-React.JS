@@ -1,5 +1,6 @@
 import { useCallback, useState } from "react";
 import PropTypes from "prop-types";
+
 import Field, { FIELD_TYPES } from "../../components/Field";
 import Select from "../../components/Select";
 import Button, { BUTTON_TYPES } from "../../components/Button";
@@ -28,16 +29,22 @@ const Form = ({ onSuccess, onError }) => {
     <form onSubmit={sendContact}>
       <div className="row">
         <div className="col">
-          <Field placeholder="" label="Nom" />
-          <Field placeholder="" label="Prénom" />
+          <Field 
+            placeholder="Votre nom ou raison sociale" 
+            label="Nom *" 
+          />
+          <Field label="Prénom" />
           <Select
             selection={["Personel", "Entreprise"]}
             onChange={() => null}
-            label="Personel / Entreprise"
+            label="Personel / Entreprise *"
             type="large"
             titleEmpty
           />
-          <Field placeholder="" label="Email" />
+          <Field 
+            placeholder="@ courriel valide SVP p.ex.: ad.resse@votre.prest.com" 
+            label="Email *" 
+          />
           <Button type={BUTTON_TYPES.SUBMIT} disabled={sending}>
             {sending ? "En cours" : "Envoyer"}
           </Button>
