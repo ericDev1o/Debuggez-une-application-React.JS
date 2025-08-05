@@ -1,8 +1,9 @@
 import { fireEvent, render, screen } from "@testing-library/react";
+
 import Form from "./index";
 
 describe("When Form is created", () => {
-  it("it must display a list of field cards", async () => {
+  it("then it must display a list of field cards", async () => {
     // Arrange
     render(<Form />);
     // Act
@@ -14,7 +15,7 @@ describe("When Form is created", () => {
     expect(email && name && firstname && type).toBeInTheDocument();
   });
 
-  describe("and then when a click is triggered on the submit button", () => {
+  describe("and then given Form is created; when a click is triggered on the submit button", () => {
     it("then it must call success", async () => {
       const onSuccess = jest.fn();
       render(<Form onSuccess={onSuccess} />);
@@ -22,7 +23,6 @@ describe("When Form is created", () => {
       fireEvent(
         await screen.findByTestId("button-test-id"),
         new MouseEvent("click", {
-          cancelable: true,
           bubbles: true,
         })
       );

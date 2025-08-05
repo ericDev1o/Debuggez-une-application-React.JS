@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { DataProvider, api, useData } from "./index";
 
 describe("When a data context is created", () => {
-  it("then it must fetch data and keep it dislayed to final user", async () => {
+  it("then it must fetch data and keep it displayed to final user", async () => {
     // Arrange
     api.loadData = jest.fn().mockReturnValue({ result: "ok" });
     const Component = () => {
@@ -19,8 +19,8 @@ describe("When a data context is created", () => {
     // Assert
     expect(dataDisplayed).toBeInTheDocument();
   });
-  describe("and then a new events get failed", () => {
-    it("then it must keep trace of an error in the calling component only", async () => {
+  describe("and then given data context is created; when a new events fetch failed", () => {
+    it("then it must keep trace of an error in the calling component", async () => {
       window.console.error = jest.fn();
       api.loadData = jest.fn().mockRejectedValue("error on calling events");
       const Component = () => {
