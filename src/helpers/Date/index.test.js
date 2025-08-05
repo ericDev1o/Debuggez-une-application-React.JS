@@ -1,15 +1,11 @@
-/**
- * 
- */
+import { getMonth } from "./index";
 
-describe("Date helper", () => {
-    describe("When getMonth is called", () => {
-        it("the function return janvier for 2022-01-01 as date", () => {
-            // to implement
-        });
-        it("the function return juillet for 2022-07-08 as date", () => {
-            // to implement
-        });
+describe("When Date helper getMonth is called", () => {
+    it("then it must return janvier for 2022-01-01", () => {
+        // Assert
+        expect(/* Act */getMonth(new Date("2022-01-01"))).toBe("janvier")
     });
-})
-
+    it("then it must return juillet for 2022-12-08", () => {
+        expect(getMonth(new Date("2022-12-08"))).toBe("décembre")
+    });
+});
