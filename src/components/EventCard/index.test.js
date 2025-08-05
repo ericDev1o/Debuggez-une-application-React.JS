@@ -1,8 +1,10 @@
 import { render, screen } from "@testing-library/react";
+
 import EventCard from "./index";
 
-describe("When EventCard is created", () => {
-  it("must display an image with alt value", async () => {
+describe("When an EventCard is created", () => {
+  it("then it must display an image with alt value", async () => {
+    // Arrange Act
     render(
       <EventCard 
         imageSrc="http://src-image" 
@@ -12,12 +14,12 @@ describe("When EventCard is created", () => {
         label="test label"
     />);
     const imageElement = await screen.getByTestId("card-image-testid");
-
+      // Assert
     expect(imageElement).toBeInTheDocument();
     expect(imageElement.alt).toEqual("Notre dernière prestation");
   });
 
-  it("must display a title & a label & a month", async () => {
+  it("then it must display a title & a label & a month", async () => {
     render(
       <EventCard
         imageSrc="http://src-image"
@@ -37,8 +39,8 @@ describe("When EventCard is created", () => {
   });
 });
 
-describe("When EventCard has small prop", () => {
-  it("must postfix to className a modifier --small", async () => {
+describe("and then when EventCard has small prop", () => {
+  it("then it must postfix to className a modifier --small", async () => {
     render(
       <EventCard
         imageSrc="http://src-image"

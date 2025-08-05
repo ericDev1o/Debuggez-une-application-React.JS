@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 
 import Form from "./index";
 
-describe("When Form is created", () => {
+describe("When a Form is created", () => {
   it("then it must display a list of field cards", async () => {
     // Arrange
     render(<Form />);

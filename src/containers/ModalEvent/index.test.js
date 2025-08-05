@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+
 import ModalEvent from "./index";
 
 const data = {
@@ -18,19 +19,13 @@ const data = {
   ],
 };
 
-/**
- * Unfound prestation to check
- */
-describe("When Modal data is created", () => {
-  it.skip("must display a list of data by prop", async () => {
-    // Arrange
+describe("When a ModalEvent is created", () => {
+  it("it must display its event data passed by prop", async () => {
+    // Arrange Act
     render(<ModalEvent event={data} />);
-    // Act
-    await screen.findByText("1 espace d'exposition");
     // Assert
-    expect(screen.findByText("24-25-26 Février"))
-    expect(screen.findByText(
+    expect(await screen.findByText(
       "Présentation des outils analytics aux professionnels du secteur"
-    ));
+    )).toBeInTheDocument();
   });
 });

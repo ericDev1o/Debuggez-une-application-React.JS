@@ -1,11 +1,8 @@
 import { fireEvent, render, screen } from "@testing-library/react";
+
 import { api, DataProvider } from "../../contexts/DataContext";
 import Slider from "./index";
 
-/**
- * test unitaire avec
- * data
-*/
 const data = {
   focus: [
     {
@@ -33,10 +30,6 @@ const data = {
   ],
 };
 
-/**
- * DRY
- * Utilisation du contexte
- */
 const slide = () => {
   api.loadData = jest.fn().mockReturnValue(data);
     render(
@@ -46,29 +39,19 @@ const slide = () => {
     );
 }
 
-/**
- * Test d'intégration avec
- * 
- * <DataProvider>
- *     <Slider />
- * </DataProvider>
- * 
- * trouvant d'une part
- *     le texte "janvier" existant dans data 
- * d'autre part
- *     les textes "World economic forum" et
- *     "Oeuvre à la coopération entre le secteur public et le privé."
- */
-describe("When Slider is created", () => {
-  it("must display at least a card", async () => {
+describe("When a Slider is created", () => {
+  it("then it must display at least a card", async () => {
+    // Arrange
     slide();
-
-    await screen.findByText("World economic forum");
-    await screen.findByText(
+    // Act
+    const title = await screen.findByText("World economic forum");
+    const description = await screen.findByText(
       "Oeuvre à la coopération entre le secteur public et le privé."
     );
+    // Assert
+    expect(title && description).toBeInTheDocument();
   });
-  it("must paginate", async () => {
+  it("then it must paginate", async () => {
     slide();
 
     await screen.findByText("World Farming Day");
@@ -76,6 +59,7 @@ describe("When Slider is created", () => {
       await screen.findByAltText("radio-button-1"),
       new MouseEvent("click")
     );
-    await screen.findByText("World economic forum");
+    
+    expect(await screen.findByText("World economic forum")).toBeInTheDocument();
   })
 });

@@ -1,8 +1,10 @@
 import { render, screen } from "@testing-library/react";
+
 import ServiceCard from "./index";
 
-describe("When a service card is created", () => {
-  it("must display an image with alt value", async () => {
+describe("When a ServiceCard is created", () => {
+  it("then it must display an image with alt value", async () => {
+    // Arrange Act
     render(
       <ServiceCard 
         imageSrc="http://src-image" 
@@ -12,12 +14,12 @@ describe("When a service card is created", () => {
       </ServiceCard>
     );
     const imageElement = await screen.getByTestId("card-image-testid");
-
+    // Assert
     expect(imageElement).toBeInTheDocument();
     expect(imageElement.alt).toEqual("image-alt-text");
   });
 
-  it("must display a content", async () => {
+  it("then it must display a content", async () => {
     render(
       <ServiceCard 
         imageSrc="http://src-image" 

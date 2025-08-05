@@ -1,8 +1,10 @@
 import { render, screen } from "@testing-library/react";
+
 import PeopleCard from "./index";
 
-describe("When a people card is created", () => {
-  it("must display an image with alt value", async () => {
+describe("When a PeopleCard is created", () => {
+  it("then it must display an image with alt value", async () => {
+    // Arrange Act
     render(
       <PeopleCard 
         imageSrc="http://src-image" 
@@ -11,12 +13,12 @@ describe("When a people card is created", () => {
         position="test position" />
     );
     const imageElement = await screen.getByTestId("card-image-testid");
-
+    // Assert
     expect(imageElement).toBeInTheDocument();
     expect(imageElement.alt).toEqual("image-alt-text");
   });
 
-  it("must display a title and a month", async () => {
+  it("then it must display a title and a month", async () => {
     render(
       <PeopleCard
         imageSrc="http://src-image"

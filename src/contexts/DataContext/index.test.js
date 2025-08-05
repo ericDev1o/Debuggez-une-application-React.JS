@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { DataProvider, api, useData } from "./index";
 
-describe("When a data context is created", () => {
+describe("When a DataContext is created", () => {
   it("then it must fetch data and keep it displayed to final user", async () => {
     // Arrange
     api.loadData = jest.fn().mockReturnValue({ result: "ok" });
