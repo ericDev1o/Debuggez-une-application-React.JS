@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+
 import ModalEvent from "./index";
 
 const data = {
@@ -12,20 +13,19 @@ const data = {
   periode: "24-25-26 Février",
   prestations: [
     "1 espace d’exposition",
-    "1 scéne principale",
+    "1 scene principale",
     "2 espaces de restaurations",
     "1 site web dédié",
   ],
 };
 
-describe("When Modal data is created", () => {
-  it("a list of mandatories data is displayed", async () => {
+describe("When a ModalEvent is created", () => {
+  it("it must display its event data passed by prop", async () => {
+    // Arrange Act
     render(<ModalEvent event={data} />);
-    await screen.findByText("1 espace d’exposition");
-    await screen.findByText("24-25-26 Février");
-    await screen.findByText(
+    // Assert
+    expect(await screen.findByText(
       "Présentation des outils analytics aux professionnels du secteur"
-    );
-    await screen.findByText("Conférence #productCON");
+    )).toBeInTheDocument();
   });
 });

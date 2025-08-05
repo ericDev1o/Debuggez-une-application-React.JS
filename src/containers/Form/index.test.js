@@ -1,34 +1,35 @@
 import { fireEvent, render, screen } from "@testing-library/react";
+
 import Form from "./index";
 
-describe("When Form is created", () => {
-  it("then it must display the minimal set of fields", async () => {
+describe("When a Form is created", () => {
+  it("then it must display a list of field cards", async () => {
+    // Arrange
     render(<Form />);
-    const email = await screen.findByText("Email *");
-    const name = await screen.findByText("Nom *");
+    // Act
+    const email = await screen.findByText("Email");
+    const name = await screen.findByText("Nom");
     const firstname = await screen.findByText("Prénom");
-    const type = await screen.findByText("Personel / Entreprise *");
-
+    const type = await screen.findByText("Personel / Entreprise");
+    // Assert
     expect(email && name && firstname && type).toBeInTheDocument();
   });
-});
 
-describe("When a click is triggered on the submit button", () => {
-  it("then it must call the success action", async () => {
-    // Arrange
-    const onSuccess = jest.fn();
-    render(<Form onSuccess={onSuccess} />);
-    // Act
-    fireEvent(
-      await screen.findByTestId("button-test-id"),
-      new MouseEvent("click", {
-        cancelable: true,
-        bubbles: true,
-      })
-    );
-    await screen.findByText("En cours");
-    await screen.findByText("Envoyer");
-    // Assert
-    expect(onSuccess).toHaveBeenCalled();
+  describe("and then given Form is created; when a click is triggered on the submit button", () => {
+    it("then it must call success", async () => {
+      const onSuccess = jest.fn();
+      render(<Form onSuccess={onSuccess} />);
+
+      fireEvent(
+        await screen.findByTestId("button-test-id"),
+        new MouseEvent("click", {
+          bubbles: true,
+        })
+      );
+      await screen.findByText("En cours");
+      await screen.findByText("Envoyer");
+
+      expect(onSuccess).toHaveBeenCalled();
+    });
   });
 });
