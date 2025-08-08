@@ -17,18 +17,19 @@ describe("When Home is created", () => {
     // Arrange
     home()
     // Act
-    const eventstitle = await screen.findAllByText("Nos réalisations")
+    const eventsTitle = screen.getAllByText("Nos réalisations")
     const event = await screen.findAllByTestId("card-image-testid")
     // Assert
-    expect(eventstitle[1] && event[0]).toBeInTheDocument()
+    /* eventsTitle[0] is in the header nav */
+    expect(eventsTitle[1] && event[0]).toBeInTheDocument()
   })
 
   /* Service */
   it("then it must display services section", () => {
     home()
 
-    const servicesTitle = screen.findAllByText("Nos services")
-    const servicesParagraph = screen.findByText("Nous organisons des évènements sur mesure partout dans le monde")
+    const servicesTitle = screen.getAllByText("Nos services")
+    const servicesParagraph = screen.getByText("Nous organisons des évènements sur mesure partout dans le monde")
 
     expect(servicesTitle[1] && servicesParagraph).toBeInTheDocument()
   })
@@ -64,11 +65,11 @@ describe("When Home is created", () => {
   })
 
   /* People */
-  it("then it must display people", async () => {
+  it("then it must display people section", () => {
     home()
 
-    const peopleTitle = await screen.findAllByText("Notre équipe")
-    const peopleParagraph = await screen.findByText("Une équipe d’experts dédiés à l’organisation de vos évènements")
+    const peopleTitle = screen.getAllByText("Notre équipe")
+    const peopleParagraph = screen.getByText("Une équipe d’experts dédiés à l’organisation de vos évènements")
 
     expect(peopleTitle[1] && peopleParagraph).toBeInTheDocument()
   })
@@ -144,20 +145,20 @@ describe("When Home is created", () => {
   })
 
   /* footer */
-  it("then it must display a footer", async () => {
+  it("then it must display a footer", () => {
     home()
 
-    const contact = await screen.findByText("Contactez-nous")
-    const address = await screen.findByText("45 avenue de la République, 75000 Paris")
-    const phone = await screen.findByText("01 23 45 67 89")
-    const email = await screen.findByText("contact@724events.com")
+    const contact = screen.getByText("Contactez-nous")
+    const address = screen.getByText("45 avenue de la République, 75000 Paris")
+    const phone = screen.getByText("01 23 45 67 89")
+    const email = screen.getByText("contact@724events.com")
 
     expect(contact && address && phone && email).toBeInTheDocument()
   })
   it("then it must display an event card about the last event in the footer", async () => {
     home()
 
-    const last = await screen.findByText("Notre dernière prestation")
+    const last = screen.getByText("Notre dernière prestation")
     const smallcard = await screen.findByTestId("card-testid")
 
     expect(last && smallcard).toBeInTheDocument()
@@ -174,7 +175,6 @@ describe("When Home is created", () => {
           bubbles: true,
         })
       );
-      screen.findByText("En cours");
       const message = await screen.findByText("Message envoyé !");
       
       expect(message).toBeInTheDocument();
