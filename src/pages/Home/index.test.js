@@ -67,9 +67,80 @@ describe("When Home is created", () => {
   it("then it must display people", async () => {
     home()
 
-    const people = await screen.findByText("Une équipe d’experts dédiés à l’ogranisation de vos événements")
+    const peopleTitle = await screen.findAllByText("Notre équipe")
+    const peopleParagraph = await screen.findByText("Une équipe d’experts dédiés à l’organisation de vos évènements")
 
-    expect(people).toBeInTheDocument()
+    expect(peopleTitle[1] && peopleParagraph).toBeInTheDocument()
+  })
+
+  it(`then given a people card is created
+    it must display a unique meaningful alt text instead 
+    in case of CEO image data retrieval error`, async () => {
+    home();
+
+    const CEO = await screen.findByAltText("Notre CEO Samira"); 
+    
+    expect(CEO).toBeInTheDocument();
+  })
+
+  it(`then given a people card is created
+    it must display a unique meaningful alt text instead 
+    in case of "Directeur Marketing" image data retrieval error`, async () => {
+    home();
+
+    const DM = await screen.findByAltText("Notre directeur marketing Jean-Baptiste"); 
+    
+    expect(DM).toBeInTheDocument();
+  })
+
+  it(`then given a people card is created
+    it must display a unique meaningful alt text instead 
+    in case of CEO image data retrieval error`, async () => {
+    home();
+
+    const CEO = await screen.findByAltText("Notre CEO Samira"); 
+    
+    expect(CEO).toBeInTheDocument();
+  })
+
+  it(`then given a people card is created
+    it must display a unique meaningful alt text instead 
+    in case of CXO image data retrieval error`, async () => {
+    home();
+
+    const CXO = await screen.findByAltText("Notre CXO Alice"); 
+    
+    expect(CXO).toBeInTheDocument();
+  })
+
+  it(`then given a people card is created
+    it must display a unique meaningful alt text instead 
+    in case of "Animateur" image data retrieval error`, async () => {
+    home();
+
+    const A = await screen.findByAltText("Notre animateur Luis"); 
+    
+    expect(A).toBeInTheDocument();
+  })
+
+  it(`then given a people card is created
+    it must display a unique meaningful alt text instead 
+    in case of "VP Animation" image data retrieval error`, async () => {
+    home();
+
+    const VPA = await screen.findByAltText("Notre VP animation Christine"); 
+    
+    expect(VPA).toBeInTheDocument();
+  })
+
+  it(`then given a people card is created
+    it must display a unique meaningful alt text instead 
+    in case of "VP Communication" image data retrieval error`, async () => {
+    home();
+
+    const VPC = await screen.findByAltText("Notre VP communication Isabelle"); 
+    
+    expect(VPC).toBeInTheDocument();
   })
 
   /* footer */
