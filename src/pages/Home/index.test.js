@@ -12,6 +12,7 @@ const home = () => {
 }
 
 describe("When Home is created", () => {
+  /* Events */
   it("then it must display events", async () => {
     // Arrange
     home()
@@ -21,6 +22,48 @@ describe("When Home is created", () => {
     // Assert
     expect(eventstitle[1] && event[0]).toBeInTheDocument()
   })
+
+  /* Service */
+  it("then it must display services section", () => {
+    home()
+
+    const servicesTitle = screen.findAllByText("Nos services")
+    const servicesParagraph = screen.findByText("Nous organisons des évènements sur mesure partout dans le monde")
+
+    expect(servicesTitle[1] && servicesParagraph).toBeInTheDocument()
+  })
+
+  it(`then given a service card is created
+    it must display a unique meaningful alt text instead 
+    in case of "Soirée d'entreprise" image data retrieval error`, async () => {
+    home();
+
+    const soirees = await screen.findByAltText("dîner d'entreprise"); 
+    
+    expect(soirees).toBeInTheDocument();
+  })
+
+  it(`then given a service card is created
+    it must display a unique meaningful alt text instead 
+    in case of "Conférences" image data retrieval error`, async () => {
+    home();
+
+    const conferences = await screen.findByAltText("hall de conférences"); 
+    
+    expect(conferences).toBeInTheDocument();
+  })
+
+  it(`then given a service card is created
+    it must display a unique meaningful alt text instead 
+    in case of "Expérience digitale" image data retrieval error`, async () => {
+    home();
+
+    const experience = await screen.findByAltText("expérience de réalité virtuelle avec casque"); 
+    
+    expect(experience).toBeInTheDocument();
+  })
+
+  /* People */
   it("then it must display people", async () => {
     home()
 
@@ -28,6 +71,8 @@ describe("When Home is created", () => {
 
     expect(people).toBeInTheDocument()
   })
+
+  /* footer */
   it("then it must display a footer", async () => {
     home()
 
@@ -46,20 +91,22 @@ describe("When Home is created", () => {
 
     expect(last && smallcard).toBeInTheDocument()
   })
-});
-describe("and then given home is created; when a click is triggered on the submit button", () => {
-  it("then it must display a success message", async () => {
-    home();
-    
-    fireEvent(
-      await screen.findByText("Envoyer"),
-      new MouseEvent("click", {
-        bubbles: true,
-      })
-    );
-    screen.findByText("En cours");
-    const message = await screen.findByText("Message envoyé !");
-    
-    expect(message).toBeInTheDocument();
+
+  /* Contact form */
+  describe("and then given home is created; when a click is triggered on the submit button", () => {
+    it("then it must display a success message", async () => {
+      home();
+      
+      fireEvent(
+        await screen.findByText("Envoyer"),
+        new MouseEvent("click", {
+          bubbles: true,
+        })
+      );
+      screen.findByText("En cours");
+      const message = await screen.findByText("Message envoyé !");
+      
+      expect(message).toBeInTheDocument();
+    });
   });
 });
