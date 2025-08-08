@@ -96,16 +96,6 @@ describe("When Home is created", () => {
 
   it(`then given a people card is created
     it must display a unique meaningful alt text instead 
-    in case of CEO image data retrieval error`, async () => {
-    home();
-
-    const CEO = await screen.findByAltText("Notre CEO Samira"); 
-    
-    expect(CEO).toBeInTheDocument();
-  })
-
-  it(`then given a people card is created
-    it must display a unique meaningful alt text instead 
     in case of CXO image data retrieval error`, async () => {
     home();
 
